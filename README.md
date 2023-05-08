@@ -18,7 +18,6 @@ Update the package lists:
 `sudo apt-get update`
 
 Install the latest version of PostgreSQL.
-
 If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
 
 `sudo apt-get -y install postgresql`
@@ -30,11 +29,14 @@ FATAL:  role "reqishere" does not exist
 Couldn't create 'MyBlog_development' database.
 
 login as su
+
 `sudo su - postgres`
 run psql
+
 `psql -U postgres`
 
 when you got this postgres=#, run this command:
+
 `create role reqishere with createdb login password 'yourpassword';`
 
 now, you can test it.

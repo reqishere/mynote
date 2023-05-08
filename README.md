@@ -25,12 +25,13 @@ If you want a specific version, use 'postgresql-12' or similar instead of 'postg
 ---
 
 # PostgreSQL error
-FATAL:  role "reqishere" does not exist
-Couldn't create 'MyBlog_development' database.
+> FATAL:  role "reqishere" does not exist
+> Couldn't create 'MyBlog_development' database.
 
 login as su
 
 `sudo su - postgres`
+
 run psql
 
 `psql -U postgres`

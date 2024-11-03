@@ -50,12 +50,13 @@ now, you can test it.
 `sudo nano /lib/systemd/system-sleep/fix-mouse.sh`
 
 2. write this and save:
-`#!/bin/bash
+```#!/bin/bash
 if [ "$1" = "post" ]; then
+    modprobe -r usbhid
     modprobe usbhid
-fi`
+fi```
 
-3. allow executing script
+4. allow executing script
 `sudo chmod +x /lib/systemd/system-sleep/fix-mouse.sh`
 
 ---

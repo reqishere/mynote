@@ -57,3 +57,6 @@ fi`
 
 3. allow executing script
 `sudo chmod +x /lib/systemd/system-sleep/fix-mouse.sh`
+
+---
+

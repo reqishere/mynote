@@ -44,3 +44,16 @@ now, you can test it.
 
 ---
 
+# Script repairing mouse freezing after sleep / suspend in linux
+
+1. open terminal, then run this:
+`sudo nano /lib/systemd/system-sleep/fix-mouse.sh`
+
+2. write this and save:
+`#!/bin/bash
+if [ "$1" = "post" ]; then
+    modprobe usbhid
+fi`
+
+3. allow executing script
+`sudo chmod +x /lib/systemd/system-sleep/fix-mouse.sh`

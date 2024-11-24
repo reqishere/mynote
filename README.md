@@ -63,7 +63,7 @@ fi
 
 ---
 
-# Fix Grub baca windows OS
+# Fix Grub in linux for read windows OS
 
 1. open terminal, then run this:
    `sudo apt install os-prober`
@@ -75,5 +75,9 @@ fi
     ```
     GRUB_DISABLE_OS_PROBER=false
     ```
-4. save then reboot the system
-
+    
+4. then run this to update grub:
+   `sudo update-grub`
+   
+5. save then reboot the system
+   `reboot`

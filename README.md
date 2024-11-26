@@ -44,37 +44,6 @@ now, you can test it.
 
 ---
 
-# Script repairing mouse freezing after sleep / suspend in linux
-
-1. open terminal, then run this:
-   `sudo nano /lib/systemd/system-sleep/fix-mouse.sh`
-
-3. write this and save:
-```
-#!/bin/bash
-if [ "$1" = "post" ]; then
-    modprobe -r usbhid
-    modprobe usbhid
-fi
-```
-
-4. allow executing script
-   `sudo chmod +x /lib/systemd/system-sleep/fix-mouse.sh`
-
----
-
-# Fix Grub in linux for read windows OS
-
-1. open terminal, then run this:
-   `sudo apt install os-prober`
-
-2. if done, edit this file:
-   `sudo nano /etc/default/grub`
-
-3. then write this:
-    ```
-    GRUB_DISABLE_OS_PROBER=false
-    ```
     
 4. then run this to update grub:
    `sudo update-grub`

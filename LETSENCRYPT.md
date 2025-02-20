@@ -40,6 +40,7 @@ curl http://nama_domain.com/.well-known/acme-challenge/testing.txt
 - masuk ke config "Apache Webserver"
 - masuk ke "Global Configuration"
 - pilih menu "Edit Config Files"
+- pilih file .conf VirtualHost domain anda yang ingin diubah.
 - cek VirtualHost port :443, set agar bukan ip address yang ada di sana melainkan *. contoh:
 ```
 <VirtualHost 192.168.1.2:443>

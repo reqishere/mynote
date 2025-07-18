@@ -76,6 +76,11 @@ Source: Masukkan kode berikut. (Ganti nama_sertifikat_anda dengan nama yang Anda
     :log info "Mikrotik: Removed existing certificate named $newCertName.";
 }
 
+:if ([:len $existingCertId1] > 0) do={
+    /certificate remove $existingCertId1;
+    :log info "Mikrotik: Removed existing certificate named $newCertName _1.";
+}
+
 :delay 3s;
 
 

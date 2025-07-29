@@ -132,20 +132,24 @@ Instal SCP Client (jika belum ada):
 Umumnya ssh dan scp sudah terinstal di kebanyakan distribusi Linux.
 
 
-Buat file skrip di server Anda (misal di /opt/scripts/):
+disini, kita perlu buat 2 script, script untuk auto renew cert pakai certbot, dan script untuk eksekusi auto push cert dari server ke mikrotik. nanti script certbot harus atur --deploy-hook yang ditujukan ke script push cert, karena pembuatan cert tidak langsung bisa tanpa ada jeda.
+
+dibawah pembuatan file untuk auto certbot renew:
+Buat file skrip di server Anda di folder ini (misal di /opt/scripts/):
 Buat Skrip Otomatisasi (misal: automatic_certbot_file.sh):
 
 {/opt/scripts/automatic_certbot_file.sh}
 ```
 #!/bin/bash
 
-certbot renew --quiet --non-interactive --deploy-hook "/opt/scripts/server-push-mikrotik-ssh.sh"
+certbot renew --quiet --non-interactive --deploy-hook "/opt/scripts/push_cert_to_mikrotik.sh"
 ```
 Pastikan skrip ini memiliki izin eksekusi (chmod +x automatic_certbot_file.sh).
 
+Buat file skrip di server Anda di folder ini (misal di /opt/scripts/):
+Buat Skrip Otomatisasi (misal: push_cert_to_mikrotik.sh):
 Ganti MIKROTIK_IP, MIKROTIK_USER, dan MIKROTIK_PASS dengan detail Mikrotik Anda.
 Ganti DOMAIN dengan domain Anda.
-Pastikan skrip ini memiliki izin eksekusi (chmod +x push_cert_to_mikrotik.sh).
 
 {/opt/scripts/push_cert_to_mikrotik.sh}
 ```
@@ -200,6 +204,9 @@ echo "Mikrotik certificate update completed."
 #    scp -P "$MIKROTIK_SSH_PORT" -i /path/to/your/private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$FULLCHAIN_FILE" "$MIKROTIK_USER@$MIKROTIK_IP:fullchain.pem"
 #    ssh -p "$MIKROTIK_SSH_PORT" -i /path/to/your/private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$MIKROTIK_USER@$MIKROTIK_IP" "/system script run import_hotspot_cert"
 ```
+Pastikan skrip ini memiliki izin eksekusi (chmod +x push_cert_to_mikrotik.sh).
+
+#####################################
 
 Integrasikan dengan Cron Job/Certbot Hook:
 

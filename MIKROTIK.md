@@ -125,24 +125,31 @@ B. Persiapan di Server Lokal (Linux dengan Certbot)
 Asumsi Anda menggunakan Certbot untuk Let's Encrypt.
 
 Identifikasi Lokasi Sertifikat:
-Sertifikat Let's Encrypt untuk muhipa.web.id biasanya ada di /etc/letsencrypt/live/muhipa.web.id/.
+Sertifikat Let's Encrypt untuk example.com biasanya ada di /etc/letsencrypt/live/example.com/.
 Anda akan membutuhkan fullchain.pem (sertifikat + intermediate) dan privkey.pem (private key).
 
 Instal SCP Client (jika belum ada):
 Umumnya ssh dan scp sudah terinstal di kebanyakan distribusi Linux.
-Buat Skrip Otomatisasi (misal: automatic_certbot_file.sh):
+
 
 Buat file skrip di server Anda (misal di /opt/scripts/):
+Buat Skrip Otomatisasi (misal: automatic_certbot_file.sh):
+
+{/opt/scripts/automatic_certbot_file.sh}
+```
+#!/bin/bash
+
+certbot renew --quiet --non-interactive --deploy-hook "/opt/scripts/server-push-mikrotik-ssh.sh"
+```
+Pastikan skrip ini memiliki izin eksekusi (chmod +x automatic_certbot_file.sh).
+
 Ganti MIKROTIK_IP, MIKROTIK_USER, dan MIKROTIK_PASS dengan detail Mikrotik Anda.
 Ganti DOMAIN dengan domain Anda.
 Pastikan skrip ini memiliki izin eksekusi (chmod +x push_cert_to_mikrotik.sh).
 
-
-{push_cert_to_mikrotik.sh}
+{/opt/scripts/push_cert_to_mikrotik.sh}
 ```
 #!/bin/bash
-
-#certbot renew --quiet --non-interactive --email youremail.mail.com
 
 # --- Konfigurasi ---
 DOMAIN="your_domain"
@@ -197,7 +204,7 @@ echo "Mikrotik certificate update completed."
 Integrasikan dengan Cron Job/Certbot Hook:
 
 Anda bisa menjalankan skrip ini secara manual, atau lebih baik lagi, otomatiskan dengan menambahkan ke cron atau sebagai deploy hook di Certbot.
-Untuk Certbot Deploy Hook: Tambahkan baris post_hook = /opt/scripts/push_cert_to_mikrotik.sh ke konfigurasi Certbot Anda (/etc/letsencrypt/renewal/your_domain.com.conf) atau gunakan --deploy-hook saat memperbarui secara manual.
+--deploy-hook sudah di atur di automatic_certbot_file.sh, dan harus di sesuaikan untuk menjalankan otomatis file push_cert_to_mikrotik.sh jika ingin keberlangsungan yang baik
 
 Contoh entry cron (akan dijalankan setiap hari, Certbot akan cek apakah perlu perbarui):
-0 3 * * * /opt/scripts/push_cert_to_mikrotik.sh (jalan jam 3 pagi setiap hari)
+0 3 1 * * /opt/scripts/automatic_certbot_file.sh (jalan jam 3 pagi setiap hari dan setiap tanggal 1 di tiap bulan)

@@ -7,8 +7,8 @@ ProxyPass /.well-known !
 Alias /.well-known/acme-challenge /home/{ NAMA USER }/public_html/.well-known/acme-challenge
 
 <Directory /home/{ NAMA USER }/public_html/.well-known/acme-challenge>
-    AllowOverride None
-    Options None
+    AllowOverride None # cek ini baik-baik, biasanya ada yang berubah
+    Options None # cek ini baik-baik, biasanya ada yang berubah
     Require all granted
 </Directory>
 

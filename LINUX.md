@@ -71,3 +71,30 @@ file that mounts that drive with `ntfs-3g`:
 
 
 Save your changes and reboot your machine.
+
+---
+
+# Install Cisco Packet Tracer 8.2.2 that supports only 22.04 as of now to ubuntu 24.04 based system
+
+Cisco Packet Tracer 8.2.2's .deb package (e.g., CiscoPacketTracer822_amd64_signed.deb) is built for older Ubuntu versions (like 20.04 or 22.04) and depends on libgl1-mesa-glx, a transitional package for legacy OpenGL compatibility. In Ubuntu 24.04 (and thus Linux Mint 22, which uses Ubuntu 24.04 as its base), this package was removed in favor of libgl1 and libglx-mesa0. Attempting to install via sudo apt install ./your-deb-file.deb fails with an "unmet dependencies" error for libgl1-mesa-glx.
+
+Download the Packet Tracer .deb from Cisco Networking Academy (requires login): netacad.com. Save it to ~/Downloads 
+(e.g., CiscoPacketTracer822_amd64_signed.deb).
+
+then download needed package:
+```
+cd ~/Downloads
+wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mesa/libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb
+```
+
+install it:
+```
+sudo dpkg -i ~/Downloads/libgl1-mesa-glx_*.deb
+```
+
+then install Cisco Packet Tracer 8.2.2:
+```
+sudo dpkg -i ~/Downloads/CiscoPacketTracer822_amd64_signed.deb
+```
+
+then try to run the Cisco Packet Tracer, if still error, go googling it.

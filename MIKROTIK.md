@@ -76,24 +76,30 @@ Source: Masukkan kode berikut. (Ganti nama_sertifikat_anda dengan nama yang Anda
     :log info "Mikrotik: Removed existing certificate named $newCertName.";
 }
 
+:delay 5s;
+
 :if ([:len $existingCertId1] > 0) do={
     /certificate remove $existingCertId1;
     :log info "Mikrotik: Removed existing certificate named $newCertName _1.";
 }
 
-:delay 3s;
+:delay 5s;
 
 
 # Impor fullchain. Akan otomatis mencocokkan dengan private key yang sudah ada
 # Gunakan nama yang sama agar keduanya terikat pada satu entri sertifikat
 /certificate import name="$newCertName" file-name="$fullchainFileName" passphrase="";
-:delay 2s;
+
+:delay 5s;
+
 :log info "Mikrotik: Fullchain certificate $fullchainFileName imported for $newCertName fullchain cert.";
 
 
 # Impor private key terlebih dahulu. Pastikan nama file sesuai dengan yang di-upload
 /certificate import name="$newCertName" file-name="$privkeyFileName" passphrase="";
-:delay 2s;
+
+:delay 5s;
+
 :log info "Mikrotik: Private key $privkeyFileName imported as $newCertName private cert.";
 
 ###########################
@@ -102,7 +108,7 @@ Source: Masukkan kode berikut. (Ganti nama_sertifikat_anda dengan nama yang Anda
 :local countCertValid [:len $certValidAndTrusted];
 :local profileHotspot "Profile SMK";
 
-:delay 2s;
+:delay 5s;
 
 # Cari sertifikat baru berdasarkan nama yang sudah kita berikan saat import
 :log info "Mikrotik: cek sertifikat valid $countCertValid";
@@ -173,6 +179,7 @@ SSH_PRIVATE_FILE="/home/your_user/.ssh/id_rsa"
 FULLCHAIN_FILE="$CERT_DIR/fullchain.pem"
 PRIVKEY_FILE="$CERT_DIR/privkey.pem"
 
+
 # --- Transfer File ke Mikrotik via SCP ---
 echo "Uploading certificate files to Mikrotik..."
 # scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$FULLCHAIN_FILE" "$MIKROTIK_USER@$MIKROTIK_IP:fullchain.pem"
@@ -188,6 +195,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 echo "Files uploaded successfully."
+
 
 # --- Eksekusi Skrip Impor di Mikrotik via SSH ---
 echo "Executing import script on Mikrotik..."

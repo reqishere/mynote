@@ -73,6 +73,7 @@ file that mounts that drive with `ntfs-3g`:
 
 
 or with `lowntfs-3g` for with good performance and NOT case-sensitive:
+
 ```UUID=yourUUID /data lowntfs-3g uid=yourUID,gid=yourGID,umask=000,defaults,rw,exec,locale=en_US.utf8,nofail 0 0```
 
 

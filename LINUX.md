@@ -69,8 +69,11 @@ From a command-line, we need to know what the user id and group id:
 Add a line to your `/etc/fstab` based on your UUID and your UID and GID
 file that mounts that drive with `ntfs-3g`:
 
-
 ```UUID=yourUUID /data ntfs-3g uid=yourUID,gid=yourGID,umask=000,defaults,rw,exec,locale=en_US.utf8,nofail 0 0```
+
+
+or with `lowntfs-3g` for with good performance and NOT case-sensitive:
+```UUID=yourUUID /data lowntfs-3g uid=yourUID,gid=yourGID,umask=000,defaults,rw,exec,locale=en_US.utf8,nofail 0 0```
 
 
 Save your changes and reboot your machine.

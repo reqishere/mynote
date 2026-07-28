@@ -62,12 +62,15 @@ From a command-line, determine the UUID of the drive containing the NTFS partiti
 
 ```sudo blkid```
 
+From a command-line, we need to know what the user id and group id:
 
-Add a line to your `/etc/fstab`
+```id```
+
+Add a line to your `/etc/fstab` based on your UUID and your UID and GID
 file that mounts that drive with `ntfs-3g`:
 
 
-```UUID=yourUUID /data ntfs-3g defaults,locale=en_US.utf8 0 0```
+```UUID=yourUUID /data ntfs-3g uid=yourUID,gid=yourGID,umask=000,defaults,rw,exec,locale=en_US.utf8,nofail 0 0```
 
 
 Save your changes and reboot your machine.

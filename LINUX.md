@@ -105,3 +105,12 @@ sudo dpkg -i ~/Downloads/CiscoPacketTracer822_amd64_signed.deb
 ```
 
 then try to run the Cisco Packet Tracer, if still error, go googling it.
+
+# Install gamescope for fixing mouse stuck in ubuntu 24.04
+```bash
+sudo add-apt-repository ppa:3v1n0/gamescope
+sudo apt update
+sudo apt install \
+    vulkan-tools \
+    gamescope
+```

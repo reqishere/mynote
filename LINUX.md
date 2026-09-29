@@ -116,8 +116,8 @@ sudo apt install \
 ```
 edit steam launch command for the game using this:
 ```bash
-gamescope -W 1920 -H 1080 -r 60 --fullscreen --force-grab-cursor -- %command%
+gamescope -W 1920 -H 1080 -r 60 --force-grab-cursor -- %command%
 ```
 notes: remember to change the width, height, response vsync monitor first!!!
 
-after that, enjoy the game 8D
+after that, enjoy the game 8D. oh you can try to fullscreen with Super + F (or Windows + F button if u using windows keyboard)

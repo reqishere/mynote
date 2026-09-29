@@ -114,3 +114,10 @@ sudo apt install \
     vulkan-tools \
     gamescope
 ```
+edit steam launch command for the game using this:
+```bash
+gamescope -W 1920 -H 1080 -r 60 --fullscreen --force-grab-cursor -- %command%
+```
+notes: remember to change the width, height, response vsync monitor first!!!
+
+after that, enjoy the game 8D
